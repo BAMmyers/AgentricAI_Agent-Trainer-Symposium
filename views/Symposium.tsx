@@ -188,7 +188,18 @@ const Symposium: React.FC<SymposiumProps> = ({ isOffline }) => {
             for await (const chunk of stream) {
                 if (!isSimulatingRef.current) break;
                 fullText += chunk;
-                setConversation(prev => prev.map(m => m.timestamp === agentMessage.timestamp ? {...m, text: fullText} : m));
+                setConversation(prev => {
+                    const messageIndex = prev.findIndex(m => m.timestamp === agentMessage.timestamp);
+                    if (messageIndex > -1) {
+                        const newConversation = [...prev];
+                        newConversation[messageIndex] = {
+                            ...newConversation[messageIndex],
+                            text: newConversation[messageIndex].text + chunk
+                        };
+                        return newConversation;
+                    }
+                    return prev;
+                });
             }
 
             currentHistory.push({ ...agentMessage, text: fullText });
