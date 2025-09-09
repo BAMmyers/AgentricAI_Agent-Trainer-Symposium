@@ -1,0 +1,5 @@
+{
+  "name": "AgentricAI: Agent Interface",
+  "description": "A dynamic, multi-modal GUI for testing, interacting with, and training autonomous agents. Load agent definitions from JSON, engage in real-time chat across various computational modes, and observe the agent's knowledge evolve.",
+  "requestFramePermissions": []
+}
